@@ -1,0 +1,38 @@
+# Core Python utilities
+numpy
+pandas
+python-dotenv
+
+# Web framework (for API / chat interface)
+flask
+flask-cors
+
+# LangChain ecosystem
+langchain
+langchain-community
+langchain-core
+langchain-text-splitters
+
+# Hugging Face
+transformers
+langchain-huggingface
+huggingface-hub
+accelerate
+sentence-transformers
+
+# LLM backends (CPU friendly)
+torch
+tokenizers
+
+# Vector stores & retrieval
+faiss-cpu
+chromadb
+
+# Utilities
+requests
+tqdm
+pydantic
+typing-extensions
+
+# Optional (for better logging & formatting)
+rich
