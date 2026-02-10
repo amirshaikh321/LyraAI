@@ -1,20 +1,22 @@
-from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
-from dotenv import load_dotenv
-from langchain_core.prompts import PromptTemplate, load_prompt
-from langchain_core.output_parsers import StrOutputParser
+from flask import Flask, render_template, request, jsonify
+from model import ask_lyra
 
-load_dotenv()
+app = Flask(__name__)
 
-llm = HuggingFaceEndpoint(
-    repo_id="meta-llama/Llama-3.1-8B-Instruct",
-    task='text-generation'
-)
-prompt = load_prompt('temp.json')
-parser = StrOutputParser()
-model = ChatHuggingFace(llm= llm)
+@app.route("/")
+def index():
+    return render_template("index.html")
 
-chain = prompt | model | parser
+@app.route("/chat", methods=["POST"])
+def chat():
+    data = request.get_json()
+    user_query = data.get("query", "")
 
-question = input('Enter Your Question:\n')
-result = chain.invoke({'question':question})
-print(result)
+    if not user_query:
+        return jsonify({"response": "Please enter a valid message."})
+
+    response = ask_lyra(user_query)
+    return jsonify({"response": response})
+
+if __name__ == "__main__":
+    app.run(debug=True)
