@@ -4,180 +4,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lyra - AI Chat Assistant</title>
+
+    <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="app-container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="sidebar-header">
-                <div class="logo">
-                    <div class="logo-icon">⭐</div>
-                    <span class="logo-text">Lyra</span>
-                </div>
-            </div>
 
-            <button class="new-chat-btn">
-                <span class="plus-icon">+</span>
-                New Chat
-            </button>
+<div class="app-container">
 
-            <div class="conversations-section">
-                <div class="conversations-header">
-                    <span>Conversations</span>
-                    <span class="dropdown-icon">▼</span>
-                </div>
-                <ul class="conversation-list">
-                    <li class="conversation-item">
-                        <span class="icon">☰</span>
-                        <span>Project Ideas</span>
-                    </li>
-                    <li class="conversation-item">
-                        <span class="icon">○</span>
-                        <span>Code Help</span>
-                    </li>
-                    <li class="conversation-item">
-                        <span class="icon">⚙</span>
-                        <span>Travel Tips</span>
-                    </li>
-                    <li class="conversation-item">
-                        <span class="icon">📈</span>
-                        <span>Daily Journal</span>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="sidebar-footer">
-                <div class="footer-item">
-                    <span class="icon">◎</span>
-                    <span>Docs</span>
-                </div>
-                <div class="footer-item">
-                    <span class="icon">⊞</span>
-                    <span>Tools</span>
-                </div>
-                <div class="footer-item">
-                    <span class="icon">🚪</span>
-                    <span>Logout</span>
-                </div>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <div class="logo-icon">⭐</div>
+                <span class="logo-text">Lyra</span>
             </div>
         </div>
 
-        <!-- Main Chat Area -->
-        <div class="main-content">
-            <!-- Top Navigation -->
-            <div class="top-nav">
-                <button class="nav-btn">
-                    <span class="plus-icon">+</span>
-                    New Chat
-                </button>
-                <button class="nav-btn">
-                    <span class="icon">☰</span>
-                    History
-                </button>
-                <button class="nav-btn">
-                    <span class="icon">⚙</span>
-                    Settings
-                </button>
-                <button class="nav-btn">
-                    <span class="icon">ⓘ</span>
-                    Dote
-                </button>
-                <div class="user-menu">
-                    <div class="user-avatar">
-                        <img src="https://via.placeholder.com/40" alt="User">
-                    </div>
-                    <span class="user-name">User</span>
-                    <span class="dropdown-icon">▼</span>
-                </div>
+        <button class="new-chat-btn">
+            <span class="plus-icon">+</span>
+            New Chat
+        </button>
+
+        <div class="conversations-section">
+            <div class="conversations-header">
+                <span>Conversations</span>
+                <span class="dropdown-icon">▼</span>
             </div>
+            <ul class="conversation-list">
+                <li class="conversation-item">Project Ideas</li>
+                <li class="conversation-item">Code Help</li>
+                <li class="conversation-item">AI Learning</li>
+                <li class="conversation-item">Daily Journal</li>
+            </ul>
+        </div>
 
-            <!-- Chat Messages -->
-            <div class="chat-container">
-                <div class="welcome-message">
-                    <h1>Lyra ai</h1>
-                    <p>How can I assist you today?</p>
-                </div>
-
-                <div class="suggestion-chips">
-                    <button class="chip">
-                        <span class="chip-icon">📝</span>
-                        Write an article summary
-                    </button>
-                    <button class="chip">
-                        <span class="chip-icon">📘</span>
-                        Explain Python code
-                    </button>
-                    <button class="chip">
-                        <span class="chip-icon">💡</span>
-                        Brainstorm ideas
-                    </button>
-                </div>
-
-                <div class="messages" id="messages">
-                    <div class="message user-message">
-                        <div class="avatar">
-                            <img src="https://via.placeholder.com/40" alt="User">
-                        </div>
-                        <div class="message-content">
-                            Can you help me with a Python function?
-                        </div>
-                    </div>
-
-                    <div class="message assistant-message">
-                        <div class="avatar">
-                            <img src="https://via.placeholder.com/40" alt="Assistant">
-                        </div>
-                        <div class="message-content">
-                            Of course! Please share the code you'd like me to check.
-                        </div>
-                    </div>
-
-                    <div class="message user-message">
-                        <div class="avatar">
-                            <img src="https://via.placeholder.com/40" alt="User">
-                        </div>
-                        <div class="message-content">
-                            <div class="code-block">
-                                <pre><code>def calculate_sum(a, b):
-    total = a + b
-    return total</code></pre>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="message assistant-message">
-                        <div class="avatar">
-                            <img src="https://via.placeholder.com/40" alt="Assistant">
-                        </div>
-                        <div class="message-content">
-                            <p>👍 Looks good! This function adds two numbers and returns the result.</p>
-                            <div class="suggestion-box">
-                                <span class="suggestion-icon">💡</span>
-                                Consider adding input validation:
-                            </div>
-                            <div class="code-block">
-                                <pre><code>if not isinstance(a, int) or not isinstance(b, int):
-    raise ValueError('Inputs must be integers')</code></pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Input Area -->
-            <div class="input-container">
-                <button class="voice-btn">🎤</button>
-                <input type="text" class="message-input" placeholder="Type a message..." id="messageInput">
-                <button class="attach-btn">📎</button>
-                <button class="send-btn" id="sendBtn">
-                    Send
-                    <span class="dropdown-icon">▼</span>
-                </button>
-            </div>
+        <div class="sidebar-footer">
+            <div class="footer-item">Docs</div>
+            <div class="footer-item">Tools</div>
+            <div class="footer-item">Logout</div>
         </div>
     </div>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <!-- Top Navigation -->
+        <div class="top-nav">
+            <button class="nav-btn">New Chat</button>
+            <button class="nav-btn">History</button>
+            <button class="nav-btn">Settings</button>
+
+            <div class="user-menu">
+                <img src="https://via.placeholder.com/40" alt="User">
+                <span>User</span>
+            </div>
+        </div>
+
+        <!-- Chat Area -->
+        <div class="chat-container">
+            <div class="welcome-message">
+                <h1>Lyra AI</h1>
+                <p>Your AI & ML learning assistant</p>
+            </div>
+
+            <div class="suggestion-chips">
+                <button class="chip">Explain a ML concept</button>
+                <button class="chip">Recommend an AI model</button>
+                <button class="chip">Help with Python</button>
+            </div>
+
+            <!-- Messages -->
+            <div class="messages" id="messages"></div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="input-container">
+            <button class="voice-btn">🎤</button>
+            <input
+                type="text"
+                id="messageInput"
+                class="message-input"
+                placeholder="Type a message..."
+            >
+            <button class="attach-btn">📎</button>
+            <button class="send-btn" id="sendBtn">Send</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- ✅ Markdown Parser (MUST come first) -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<!-- ✅ Your JS -->
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
 </body>
 </html>
