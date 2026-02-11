@@ -14,7 +14,7 @@ const sendBtn = document.getElementById('sendBtn');
 const messagesContainer = document.getElementById('messages');
 
 // Sample user and assistant avatars
-const userAvatar = 'https://via.placeholder.com/40/4a90c8/ffffff?text=U';
+const userAvatar = 'ProfilePhoto.jpg';
 const assistantAvatar = 'https://via.placeholder.com/40/5ba3d4/ffffff?text=A';
 
 // =======================
