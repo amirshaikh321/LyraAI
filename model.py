@@ -2,6 +2,7 @@ from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 from dotenv import load_dotenv
 from langchain_core.prompts import load_prompt
 from langchain_core.output_parsers import StrOutputParser
+from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 
 load_dotenv()
 
@@ -21,8 +22,12 @@ model = ChatHuggingFace(llm=llm)
 chain = prompt | model | parser
 
 def ask_lyra(question: str) -> str:
+    messages =[]
     try:
-        return chain.invoke({"question": question})
+        messages.append(HumanMessage(content=question))
+        response = chain.invoke({"question": messages})
+        messages.append(AIMessage(content=response))
+        return response
     except Exception as e:
         print("Model error:", e)
         return "⚠️ Lyra is having trouble. Please try again."
