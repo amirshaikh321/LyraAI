@@ -15,13 +15,13 @@ llm = HuggingFaceEndpoint(
     repetition_penalty=1.1
 )
 
-SYSTEM_PROMPT = load_prompt("temp.json")
+SYSTEM_PROMPT = load_prompt("lyra_system_prompt.json")
 parser = StrOutputParser()
 model = ChatHuggingFace(llm=llm)
 
 chain = SYSTEM_PROMPT | model | parser
 
-def ask_lyra(question: str, history: list) -> str:
+async def ask_lyra(question: str, history: list) -> str:
     """
     question: the latest user message
     history:  list of {"role": "user"|"assistant", "content": "..."} dicts
@@ -42,7 +42,7 @@ def ask_lyra(question: str, history: list) -> str:
     messages.append(HumanMessage(content=question))
 
     try:
-        response = model.invoke(messages)
+        response = await model.ainvoke(messages)
         return response.content
     except Exception as e:
         print("Model error:", e)
